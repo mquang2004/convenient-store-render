@@ -1,7 +1,12 @@
-FROM tomcat:9.0
 
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+FROM tomcat:9.0-jdk17
 
-COPY convenient_store_webapp.war /usr/local/tomcat/webapps/ROOT.war
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+COPY target/convenient_store_webapp.war /usr/local/tomcat/webapps/ROOT.war
+
+ENV TZ=Asia/Ha_Noi
 
 EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
